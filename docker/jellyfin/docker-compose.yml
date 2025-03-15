@@ -9,7 +9,7 @@ services:
             - ${CONFIG_STORAGE_LOCATION}/jellyfin/cache:/cache
             - ${jellyfin_movie_media}:/movies
             - ${jellyfin_tv_media}:/tv
-        restart: on-failure
+        restart: unless-stopped
         image: jellyfin/jellyfin:latest
         environment:
             - PUID=1000

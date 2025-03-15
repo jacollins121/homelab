@@ -16,7 +16,7 @@ services:
           - 8082:8082 # qbittorrent_movies
           - 9117:9117 # jackett
       image: qmcgaw/gluetun
-      restart: on-failure
+      restart: unless-stopped
   radarr: # the movie download part
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -30,7 +30,7 @@ services:
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/radarr:/config
       - ${arr_movies_dir}:/downloads
-    restart: on-failure
+    restart: unless-stopped
 #    network_mode: service:gluetun_arr
 #    depends_on:
 #      gluetun_arr:
@@ -47,7 +47,7 @@ services:
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/sonarr:/config
       - ${arr_shows_dir}:/downloads
-    restart: on-failure
+    restart: unless-stopped
 #    network_mode: service:gluetun_arr
 #    depends_on:
 #      gluetun_arr:
@@ -55,7 +55,7 @@ services:
   jackett: # mega indexer for the arr's above
     image: linuxserver/jackett:latest
     container_name: jackett
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/jackett:/config
     network_mode: service:gluetun_arr
@@ -75,7 +75,7 @@ services:
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/qbittorrent_shows:/config
       - ${arr_shows_dir}:/downloads
-    restart: on-failure
+    restart: unless-stopped
     network_mode: service:gluetun_arr
     depends_on:
       gluetun_arr:
@@ -92,7 +92,7 @@ services:
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/qbittorrent_movies:/config
       - ${arr_movies_dir}:/downloads
-    restart: on-failure
+    restart: unless-stopped
     network_mode: service:gluetun_arr
     depends_on:
       gluetun_arr:
