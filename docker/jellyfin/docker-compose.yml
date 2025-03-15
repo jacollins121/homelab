@@ -7,9 +7,10 @@ services:
         volumes:
             - ${CONFIG_STORAGE_LOCATION}/jellyfin/config:/config
             - ${CONFIG_STORAGE_LOCATION}/jellyfin/cache:/cache
-            - ${jellyfin_media}:/media
+            - ${jellyfin_movie_media}:/movies
+            - ${jellyfin_tv_media}:/tv
         restart: on-failure
-        image: lscr.io/linuxserver/jellyfin:latest
+        image: jellyfin/jellyfin:latest
         environment:
             - PUID=1000
             - PGID=1000
