@@ -29,7 +29,8 @@ services:
       - PORT=7878 #optional
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/radarr:/config
-      - ${arr_movies_dir}:/downloads
+      - ${arr_movies_dir}/movies/torrents:/downloads/torrents
+      - ${arr_movies_dir}/movies/media:/movies
     restart: unless-stopped
 #    network_mode: service:gluetun_arr
 #    depends_on:
@@ -46,7 +47,8 @@ services:
       - TZ=America/New_York
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/sonarr:/config
-      - ${arr_shows_dir}:/downloads
+      - ${arr_shows_dir}/shows/torrents:/downloads/torrents
+      - ${arr_shows_dir}/shows/media:/shows
     restart: unless-stopped
 #    network_mode: service:gluetun_arr
 #    depends_on:
@@ -74,7 +76,7 @@ services:
       - TORRENTING_PORT=${arr_qbittorrent_shows_port}
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/qbittorrent_shows:/config
-      - ${arr_shows_dir}:/downloads
+      - ${arr_shows_dir}/shows/torrents:/downloads/torrents
     restart: unless-stopped
     network_mode: service:gluetun_arr
     depends_on:
@@ -91,7 +93,7 @@ services:
       - TORRENTING_PORT=${arr_qbittorrent_movies_port}
     volumes:
       - ${CONFIG_STORAGE_LOCATION}/qbittorrent_movies:/config
-      - ${arr_movies_dir}:/downloads
+      - ${arr_movies_dir}/movies/torrents:/downloads/torrents
     restart: unless-stopped
     network_mode: service:gluetun_arr
     depends_on:

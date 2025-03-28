@@ -8,7 +8,7 @@ services:
             - ${CONFIG_STORAGE_LOCATION}/jellyfin/config:/config
             - ${CONFIG_STORAGE_LOCATION}/jellyfin/cache:/cache
             - ${jellyfin_movie_media}:/movies
-            - ${jellyfin_tv_media}:/tv
+            - ${jellyfin_shows_media}:/shows
         restart: unless-stopped
         image: jellyfin/jellyfin:latest
         environment:
